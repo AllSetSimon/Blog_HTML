@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simon's Blog</title>
+
+    <!-- 1) 초기화하기 -->
+    <style>
+        * { 
+            margin: 0; padding: 0;
+            font-family: '맑은 고딕', 'Malgun Gothic', Gothic, sans-serif;
+        }
+        a { text-decoration: none; }
+        li { list-style: none; }
+    </style>
+
+    <!-- 기본 클래스 -->
+    <style>
+        .pull-left { float: left; }
+        .pull-right { float:right; }
+    </style>
+
+    <!-- 2. 페이지 구성하기 -->
+    <style>
+        body {
+            width: 960px; margin: 0 auto;
+            background: #E6E6E6;
+        }
+
+        #page-wrapper {
+            background: white;
+            margin: 40px 0; padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
+        }
+    </style>
+
+    <!-- 3. 헤더 구성하기 -->
+    <style>
+        #main-header { 
+            padding: 40px 50px;
+            background-image: url("imgs/ggb.JPG"); /* 배경 추가 및 y축 조절 및 투명도 조절*/
+            background-position-y: 10%;
+            opacity: 0.8;}
+
+        .master-title { 
+            font-size: 40px;  
+            font-style: oblique; /* 폰트스타일 기울임꼴 설정*/
+            color: black;
+        }
+        .master-description {
+            font-size: 15px; font-weight: 500;
+            font-style: oblique; /* 폰트스타일 기울임꼴 설정*/
+            color: #383838;
+        }
+    </style>
+
+
+    <!-- 4. 네비게이션 및 풀다운 메뉴 구성하기 -->
+    <style>
+        #main-navigation {
+            position: fixed; /* 고정바로 변경*/
+            left: 0; top: 0; right: 0; /* 고정바 변경요소 */
+            background-color: beige;
+            border-top: 1px solid #C8C8C8;
+            border-bottom: 1px solid #C8C8C8;
+            margin-bottom: 20px;
+            height: 40px;
+        }
+        
+        .outer-menu-item {
+            float: left;
+            position: relative;
+        }
+        .outer-menu-item:hover {
+            background: rgb(20, 219, 70);
+            color: beige;
+        }
+
+        .menu-title {
+            display: block;
+            height: 30px; line-height: 30px;
+            text-align: center;
+            padding: 5px 20px;
+        }
+
+        .inner-menu {
+            display: none;
+            position: absolute;
+            top: 40px; left: 0;
+            width: 100%;
+
+            background: white;
+            box-shadow: 0 2px 6px rgba(5, 5, 5, 0.9);
+            z-index: 1000;
+
+            text-align: center
+        }
+
+        .inner-menu-item > a {
+            display: block;
+            padding: 5px 10px;
+            color: black
+        }
+
+        .inner-menu-item > a:hover {
+            background: black;
+            color: white;
+        }
+    </style>
+
+
+    <!-- 5. SNS 링크 그룹 추가하기(내비게이션 내부 검색) -->
+    <style>
+        /*.search-bar {
+            height: 26px;
+            padding: 7px;
+        }
+        .input-search {
+            display: block;
+            float: left;
+
+            background-color: #FFFFFF;
+            border: 1px solid #CCCCCC;
+            border-radius: 15px 0 0 15px;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+
+            width: 120px; height: 24px;
+            padding: 0 0 0 10px;
+            font-size: 12px;
+            color: #555555;
+        }
+
+        .input-search:focus {
+            border-color: rgba(82, 168, 236, 0.8);
+            outline: 0;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+        }
+
+        .input-search-submit {
+            display: block;
+            float: left;
+
+            width: 50px; height: 26px;
+            border-radius: 0 15px 15px 0;
+            border: 1px solid #CCCCCC;
+
+            margin-left: -1px;
+
+            vertical-align: top;
+            display: inline-block;
+        }*/
+
+        .sns-link { /* 네비바에서 SNS로 링크되는 div 정의*/
+            margin-top: 5px;
+            margin-right: 10px;
+        }
+
+    </style>
+
+
+    <!-- 6. 본문 추가하기(중앙 내용) -->
+    <style>
+        /* body 태그의 너비: 960픽셀 */
+        /* #page-wrapper 태그의 padding 속성으로 내용물 너비는 920픽셀 */
+        #content { overflow: hidden; }
+        #main-section {
+            float: left;
+            width: 710px;
+        }
+        #main-aside {
+            float: right;
+            width: 200px;
+        }
+    </style>
+
+
+    <!-- 6. 본문 추가하기(본문 포스트 위쪽(좌측 구성))-->
+    <style>
+        article { 
+            padding: 0 10px 20px 10px;
+            border-bottom: 1px solid #C8C8C8;
+        }
+
+        .article-header { padding: 20px 0; }
+        .article-title { 
+            font-size: 25px;
+            font-weight: 500; 
+            padding-bottom: 10px;
+        }
+
+        /*포스트 날짜 및 조회수 조회 수정*/
+        .article-details {
+            overflow: hidden;
+        }
+        #article-date { font-size: 13px; float: left; }
+        #article-views { font-size: 13px; float: right;}
+        #article-views:hover{
+            background: bisque;
+            color: black;
+        }
+
+        .article-body {
+            font-size: 14px;
+        }
+
+        /* 새롭게 추가된 CSS */
+        .article-body > .multi_img {
+            overflow: hidden;
+        }
+
+        .multi_img > img:nth-child(1) {
+            border-radius: 20px;
+            margin-right: 5px;
+            float: left;
+        }
+
+        .multi_img > img:nth-child(2) {
+            border-radius: 20px;
+            margin-left: 5px;
+            float: right;
+        }
+
+        .reaction-list{
+            margin-top: 15px;
+        }
+
+        .reaction-list a img {
+            margin: 0 5px;
+        }
+
+
+    </style>
+
+
+    <!-- 6. 본문 추가하기(사이트 메뉴(우측 구성)) -->
+    <style>
+        .aside-list { padding: 10px 0 30px 0; }
+        .aside-list > h3 {
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .aside-list li a {
+            margin-left: 8px;
+            font-size: 13px;
+            color: #6C6C6C;
+        }
+    </style>
+    
+    <script></script>
+    <script></script>
+</head>
+<body>
+    <div id="page-wrapper">
+        <header id="main-header">
+            <hgroup>
+                <h1 class="master-title">Simon's Extreme Life in S.F.</h1>
+                <h2 class="master-description">성결대학교</h2>
+            </hgroup>
+        </header>
+        <nav class="top_bar" id="main-navigation">
+            <div class="pull-left">
+                <ul class="outer-menu">
+                    <li class="outer-menu-item">
+                        <span class="menu-title">Prologue</span>
+                        <ul class="inner-menu">
+                            <li class="inner-menu-item"><a href="#">blog Info</a></li>
+                            <li class="inner-menu-item"><a href="#">Who's Simon?</a></li>
+                        </ul>
+                    </li>
+                    <li class="outer-menu-item">
+                        <span class="menu-title">Post</span>
+                        <ul class="inner-menu">
+                            <li class="inner-menu-item"><a href="#">Arts</a></li>
+                            <li class="inner-menu-item"><a href="#">Music</a></li>
+                            <li class="inner-menu-item"><a href="#">Musical</a></li>
+                        </ul>
+                    </li>
+                    <li class="outer-menu-item">
+                        <span class="menu-title">Contact</span>
+                        <ul class="inner-menu">
+                            <li class="inner-menu-item"><a href="#">Email</a></li>
+                            <li class="inner-menu-item"><a href="#">Phone</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="pull-right">
+                <!--<div class="search-bar">
+                    <form>
+                        <input type="text" class="input-search" />
+                        <input type="submit" class="input-search-submit" value="검색" />
+                    </form>
+                </div> -->
+                <div class="sns-link">
+                    <a href="https://www.instagram.com/allset_simon/" target="__blank"><img src="icons/insta.png" alt="instagram" width="30px" height="30px"></a>
+                    <a href="https://www.facebook.com/profile.php?id=100031855123294" target="__blank"><img src="icons/fblogo.png" alt="FaceBook" width="30px" height="30px"></a>
+                    <a href="https://www.linkedin.com/in/soobin-park-218610196" target="__blank"><img src="icons/linked.png" alt="linkedin" width="30px" height="30px"></a>
+                </div>
+            </div>
+        </nav>
+        <div id="content">
+            <section id="main-section">
+                <article>
+                    <div class="article-header" id="harry">
+                        <h1 class="article-title">드디어 보게 된 해리포터와 저주받은 아이 뮤지컬!</h1>
+                        <div class="article-details">
+                            <p id="article-date">2019년 12월 12일</p>
+                            <p id="article-views">조회수 12</p>
+                        </div>
+                    </div>
+                    <div class="article-body">
+                        <div class="multi_img">
+                            <img src="imgs/ticket.JPG" width="335px" height="280px" />
+                            <img src="imgs/ticket_2.JPG" width="335px" height="280px" />
+                        </div>
+                        <br />
+                        <p>정치 수업 끝나고나서 금문교를 바라보며 오늘은 뭐할까.. 생각하다가 인터넷에서 문득 발견한 뮤지컬 소식! 뉴욕에서만 하던 해리포터와 저주받은 아이 뮤지컬을 샌프란시스코에서 한다고..? 이건 안가면 안되겠다 싶어 바로 티켓박스로 향했다. 어떤 자리라도 좋으니 내게 티켓을 달라!! 하였더니 나보고 럭키보이랜다.. 갑자기 티켓을 한장 뽑더니 중앙 자리에 방금 어떤분이 취소하고 가셨다고.. 심지어 당일 공연이라 땡처리 가격인 79달러라 하길래 정말 한치의 고민없이 질러버렸다! 너무 보고 싶던 뮤지컬이기에.. 있던 약속 다 취소하고 나홀로 관극을 시작했다.</p>
+                        <div class="reaction-list">
+                            <a href="#"><img src="icons/heart.png" alt="좋아요" width="25px" height="25px"></a>
+                            <a href="#"><img src="icons/comment.png" alt="댓글" width="25px" height="25px"></a>
+                            <a href="#"><img src="icons/share.png" alt="공유" width="25px" height="25px"></a>
+                        </div>
+                    </div>
+                </article>
+                <article>
+                    <div class="article-header" id="graduation">
+                        <h1 class="article-title">EF SanFrancisco를 졸업하며..</h1>
+                        <div class="article-details">
+                            <p id="article-date">2020년 2월 15일</p>
+                            <p id="article-views">조회수 17</p>
+                        </div>
+                    </div>
+                    <div class="article-body">
+                        <div class="multi_img">
+                            <img src="imgs/graduation.JPG" width="335px" height="280px" />
+                            <img src="imgs/graduation_2.JPG" width="335px" height="280px" />
+                        </div>
+                        <br />
+                        <p>6개월의 대장정이 끝났다. 정말 이렇게 시간이 쏜살같이 흘러갈 줄은 몰랐다. 많은 나라와 인종의 친구들을 만나 함께 지내며 이제 좀 서로에 대해 잘 알겠다 싶었는데 벌써 이별이라니! 이번 어학연수는 내 생에 잊지못할 최고의 순간으로 남을 것이다. 집없는 Homeless한테 돈을 뺏겨보기도 하고, 관공서 직원에게 인종차별을 당하기도 했지만 지금 돌이켜보면 이 또한 다신 없을 값진 경험이 아니었을까 싶다. 또한 Sally의 집에서 홈스테이를 하며 친구들과 함께 파티를 하고, 핫한 클럽에 가서 신나게 놀기도 하던 잊지못할 추억들은 내 기억속에 영원히 간직될 것이다!  </p>
+                        <div class="reaction-list">
+                            <a href="#"><img src="icons/heart.png" alt="좋아요" width="25px" height="25px"></a>
+                            <a href="#"><img src="icons/comment.png" alt="댓글" width="25px" height="25px"></a>
+                            <a href="#"><img src="icons/share.png" alt="공유" width="25px" height="25px"></a>
+                        </div>
+                    </div>
+                </article>
+            </section>
+            <aside id="main-aside">
+                <div class="aside-list">
+                    <h3>카테고리</h3>
+                    <ul>
+                        <li><a href="#">EF SanFrancisco···(1)</a></li>
+                        <li><a href="#">Trip···(0)</a></li>
+                        <li><a href="#">Activity···(1)</a></li>
+                    </ul>
+                </div>
+                <div class="aside-list">
+                    <h3>최근 글</h3>
+                    <ul>
+                        <li><a href="#harry">드디어 보게된 해리포터와 저주받은 아이 뮤지컬!</a></li>
+                        <li><a href="#graduation">EF SanFrancisco를 졸업하며..</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+        <footer id="main-footer">
+            <a href="#">Created By 컴퓨터공학과 3학년 짝반 20150910 박수빈</a>
+        </footer>
+    </div>
+</body>
+</html>
